@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostValidation;
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request as RequestCl;
@@ -19,7 +20,7 @@ class PostController extends Controller
      */
     public function index(): View | RedirectResponse
     {
-        return \view("blog.index", ["posts" => Post::paginate(3)]);
+        return \view("blog.index", ["posts" => Post::with("Category")->paginate(3)]);
     }
 
 
@@ -40,7 +41,7 @@ class PostController extends Controller
 
 
     /**
-     * Editer un poste
+     * Afficher la formulaire d'édition, et la remplire par les donnée du post à éditer
      *
      * @param Post $post
      * @return void
@@ -48,6 +49,16 @@ class PostController extends Controller
     public function edit(Post $post): view
     {
         return \view("blog.edit", ['post' => $post]);
+    }
+
+
+
+
+    public function update(Post $post, StorePostValidation $request)
+    {
+        $post->update($request->validated());
+
+        return \redirect()->route("blog.show", ["slug" => $post->slug, "post" => $post->id])->with("success", "Post updated succesfully");
     }
 
 

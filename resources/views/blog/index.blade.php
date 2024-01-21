@@ -27,6 +27,12 @@
                         </text>
                     </svg>
                     <div class="card-body">
+                        <div class="cat">
+                            <span class="badge badge-primary text-secondary">
+                                {{ $post->category->name }}
+                            </span>
+                        </div>
+
                         <p class="card-text">
                             {{ $post->content }}
                         </p>

@@ -19,7 +19,6 @@
         </div>
     @endsession
 
-
     <div class="row mb-2 mt-5">
         <div class="col-md-6 m-auto">
             <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
@@ -35,9 +34,15 @@
                         {{ $post->content }}
                     </p>
 
-                    <a href="{{ route('blog.edit', ['post' => $post->id]) }}" class="icon-link gap-1 icon-link-hover ">
-                        Edit
-                    </a>
+                    <div class="d-flex gap-2">
+                        <a href="{{ route('blog.edit', ['post' => $post->id]) }}" class="icon-link gap-1 icon-link-hover ">
+                            Edit
+                        </a>
+
+                        <a href="#" class="icon-link text-danger gap-1 icon-link-hover ">
+                            delete
+                        </a>
+                    </div>
                 </div>
                 <div class="col-auto d-none d-lg-block">
                     <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg"
@@ -63,5 +68,9 @@
         function closeAlert() {
             mAlert.style.display = "none";
         }
+
+        setTimeout(() => {
+            mAlert.style.display = "none";
+        }, 2000);
     </script>
 @endsection

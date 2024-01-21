@@ -40,6 +40,9 @@ Route::prefix("/blog")->controller(PostController::class)->name("blog.")->group(
     // edite post
     Route::get('/{post}/edit', 'edit')->name("edit");
 
+    // update post
+    Route::post('/{post}/edit', 'update');
+
     // create new post (get)
     Route::get("/new-post", "create")->name("create");
 
