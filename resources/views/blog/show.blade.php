@@ -6,24 +6,45 @@
 
 @section('content')
 
-    <div class=" py-4 d-flex justify-content-between align-items-center">
+    <div style="height: 60px" class="d-flex justify-content-between align-items-center mt-2 p-2 gap-3 pt-3">
         <h4 class="text-dashed">Post details</h4>
+        @session('success')
+            <div class="alert flex-grow-1 alert-success alert-dismissible fade show pt-3" role="alert" id="myAlert">
+                <strong>Cool !</strong> {{ session('success') }}.
+                <button type="button" class="btn-close" onclick="closeAlert()" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endsession
+
         <a class="btn btn-sm btn-primary" href="{{ route('blog.index') }}">
             Back</a>
     </div>
 
-    @session('success')
-        <div class="alert alert-warning alert-dismissible fade show" role="alert" id="myAlert">
-            <strong>Cool !</strong> {{ session('success') }}.
-            <button type="button" class="btn-close" onclick="closeAlert()" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endsession
+
 
     <div class="row mb-2 mt-5">
         <div class="col-md-6 m-auto">
             <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                 <div class="col p-4 d-flex flex-column position-static">
-                    <strong class="d-inline-block mb-2 text-primary-emphasis">World</strong>
+
+                    <div class="d-flex justify-content-between align-atems-center">
+                        <div class="cat">
+                            @if ($post->category)
+                                <span class="badge badge-primary text-secondary">
+                                    {{ $post->category?->name }}
+                                </span>
+                            @endif
+                        </div>
+                        <div class="tags">
+                            @if (!$post->tags->isEmpty())
+                                @foreach ($post->tags as $tag)
+                                    <span style="cursor: pointer;"
+                                        class="badge rounded-pill text-bg-primary">{{ $tag?->name }}</span>
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>
+
+
                     <h3 class="mb-0">
                         {{ $post->content }}
                     </h3>

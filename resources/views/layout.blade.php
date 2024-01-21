@@ -203,6 +203,10 @@
                             aria-current="page">Home</a></li>
                     <li class="nav-item"><a href="{{ route('blog.index') }}"
                             class="nav-link {{ request()->is('blog') ? 'active' : '' }}">Blogs</a></li>
+
+                    <li class="nav-item"><a href="{{ route('blog.pivoteTable') }}"
+                            class="nav-link {{ request()->is('pivoteTable') ? 'active' : '' }}">Analyse</a></li>
+
                 </ul>
             </header>
         </div>

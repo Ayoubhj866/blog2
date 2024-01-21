@@ -27,10 +27,22 @@
                         </text>
                     </svg>
                     <div class="card-body">
-                        <div class="cat">
-                            <span class="badge badge-primary text-secondary">
-                                {{ $post->category->name }}
-                            </span>
+                        <div class="d-flex justify-content-between align-atems-center">
+                            <div class="cat">
+                                @if ($post->category)
+                                    <span class="badge badge-primary text-secondary">
+                                        {{ $post->category?->name }}
+                                    </span>
+                                @endif
+                            </div>
+                            <div class="tags">
+                                @if (!$post->tags->isEmpty())
+                                    @foreach ($post->tags as $tag)
+                                        <span style="cursor: pointer;"
+                                            class="badge rounded-pill text-bg-primary">{{ $tag?->name }}</span>
+                                    @endforeach
+                                @endif
+                            </div>
                         </div>
 
                         <p class="card-text">

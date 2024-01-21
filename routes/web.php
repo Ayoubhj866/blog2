@@ -3,7 +3,7 @@
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
-/*
+/**
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -12,11 +12,12 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
-*/
+ */
 
 Route::get('/', function () {
     return view('welcome');
 });
+
 
 
 
@@ -48,4 +49,7 @@ Route::prefix("/blog")->controller(PostController::class)->name("blog.")->group(
 
     // Create new post (post)
     Route::post("/new-post", "store");
+
+    //Pivote Table Route
+    Route::get("/analyse", 'generatePivotTable')->name('pivoteTable');
 });

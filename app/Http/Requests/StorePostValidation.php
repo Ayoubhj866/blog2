@@ -30,6 +30,8 @@ class StorePostValidation extends FormRequest
             'title' => ['required', 'min:8'],
             'slug' => ['required', 'min:8'],
             'content' => ['required', 'min:8'],
+            'category_id' => ['required', 'exists:categories,id'],
+            'tags' => ['array', 'exists:tags,id'],
         ];
     }
 
