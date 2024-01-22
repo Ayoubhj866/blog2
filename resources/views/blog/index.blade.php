@@ -30,7 +30,7 @@
                         <div class="d-flex justify-content-between align-atems-center">
                             <div class="cat">
                                 @if ($post->category)
-                                    <span class="badge badge-primary text-secondary">
+                                    <span class="badge badge-primary text-secondary text-decoration-none">
                                         {{ $post->category?->name }}
                                     </span>
                                 @endif
@@ -38,20 +38,19 @@
                             <div class="tags">
                                 @if (!$post->tags->isEmpty())
                                     @foreach ($post->tags as $tag)
-                                        <span style="cursor: pointer;"
-                                            class="badge rounded-pill text-bg-primary">{{ $tag?->name }}</span>
+                                        <a href="#" style="cursor: pointer;"
+                                            class="badge rounded-pill text-bg-primary text-decoration-none">{{ $tag?->name }}</a>
                                     @endforeach
                                 @endif
                             </div>
                         </div>
-
                         <p class="card-text">
                             {{ $post->content }}
                         </p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
                                 <a href="{{ route('blog.show', ['slug' => $post->slug, 'post' => $post->id]) }}"
-                                    type="button" class="btn btn-sm btn-outline-secondary">View</a>
+                                    class="btn btn-sm btn-outline-secondary icon-link gap-1 icon-link-hover stretched-link">View</a>
                                 <a href="{{ route('blog.edit', ['post' => $post->id]) }}" type="button"
                                     class="btn btn-sm btn-outline-secondary">Edit</a>
                             </div>

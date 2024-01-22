@@ -29,9 +29,9 @@
                     <div class="d-flex justify-content-between align-atems-center">
                         <div class="cat">
                             @if ($post->category)
-                                <span class="badge badge-primary text-secondary">
+                                <a href="#" class="badge badge-primary text-secondary text-decoration-none">
                                     {{ $post->category?->name }}
-                                </span>
+                                </a>
                             @endif
                         </div>
                         <div class="tags">

@@ -206,7 +206,6 @@
 
                     <li class="nav-item"><a href="{{ route('blog.pivoteTable') }}"
                             class="nav-link {{ request()->is('pivoteTable') ? 'active' : '' }}">Analyse</a></li>
-
                 </ul>
             </header>
         </div>
