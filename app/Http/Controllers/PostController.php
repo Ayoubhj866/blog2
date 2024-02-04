@@ -18,18 +18,15 @@ class PostController extends Controller
 
 
     /**
-     * Undocumented function
+     * Afficher la view de la liste des posts
      *
      * @return void
      */
     public function index(): View | RedirectResponse
     {
+        //return les donnée avec la jointure entre les table catégories et tags
         return \view("blog.index", ["posts" => Post::with("Category", "tags")->paginate(3)]);
     }
-
-
-
-
 
 
     /**
@@ -102,8 +99,6 @@ class PostController extends Controller
     }
 
 
-
-
     /**
      *  Ajouter dans la base de donnée le nouvelle post
      *
@@ -143,5 +138,29 @@ class PostController extends Controller
         }
 
         return view('blog.pivoteTable', ['tableData' => $tableData]);
+    }
+
+
+
+
+    /**
+     * Permet de selectionner les posts ayant appartient à une catégorie
+     *
+     * @return View
+     */
+    public function filter(string $value, string $relation): View
+    {
+
+        /**
+         * select les post appartient à une category = $category
+         */
+        $posts = Post::with("category", "tags")->whereHas($relation, function ($query) use ($value, $relation) {
+            $query->where('name', "like", "%" . $value . "%");
+        })->paginate(3);
+
+        return \view("blog.index", [
+            'posts' => $posts,
+            'filter' => $relation
+        ]);
     }
 }

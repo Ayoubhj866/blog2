@@ -34,7 +34,6 @@ Route::prefix("/blog")->controller(PostController::class)->name("blog.")->group(
     // list of posts
     Route::get("/", "index")->name("index");
 
-
     //show post
     Route::get('/{slug}-{post}', "show")->where(['slug' => '[a-z0-9\-]+', 'post' => '[0-9]+',])->name("show");
 
@@ -52,4 +51,7 @@ Route::prefix("/blog")->controller(PostController::class)->name("blog.")->group(
 
     //Pivote Table Route
     Route::get("/analyse", 'generatePivotTable')->name('pivoteTable');
+
+    //Filter by catégorie
+    Route::get("/posts/posts-{value}-{relation}", "filter")->name("filter");
 });

@@ -29,7 +29,8 @@
                     <div class="d-flex justify-content-between align-atems-center">
                         <div class="cat">
                             @if ($post->category)
-                                <a href="#" class="badge badge-primary text-secondary text-decoration-none">
+                                <a href="{{ route('blog.filter', ['value' => $post->category?->name, 'relation' => 'category']) }}"
+                                    class="badge badge-primary text-secondary text-decoration-none">
                                     {{ $post->category?->name }}
                                 </a>
                             @endif
@@ -37,8 +38,9 @@
                         <div class="tags">
                             @if (!$post->tags->isEmpty())
                                 @foreach ($post->tags as $tag)
-                                    <span style="cursor: pointer;"
-                                        class="badge rounded-pill text-bg-primary">{{ $tag?->name }}</span>
+                                    <a href="{{ route('blog.filter', ['value' => $tag->name, 'relation' => 'tags']) }}"
+                                        style="cursor: pointer;"
+                                        class="badge rounded-pill text-bg-primary text-decoration-none">{{ $tag?->name }}</a>
                                 @endforeach
                             @endif
                         </div>
