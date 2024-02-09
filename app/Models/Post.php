@@ -16,7 +16,7 @@ class Post extends Model
 
 
     /**
-     * Un post appartien à une seule catégorie
+     * Un post il a une seule catégorie
      *
      * @return void
      */

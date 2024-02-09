@@ -1,6 +1,21 @@
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+
+
 <form action="" method="post">
     {{-- csrf pour asurer que cette formulaire est appartient à notre site lors de soumission --}}
     @csrf
+
+
+
     <div class="form-group">
         <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="title"
             aria-describedby="validationServer03Feedback" placeholder="Titre du blog"
@@ -43,8 +58,9 @@
         </div>
     </div>
 
+    {{-- 1 - stocker les tags dans un tableau --}}
     @php
-        $tagsIds = $post->tags()->pluck('id'); //rerrésente les id des tags qui sont déja dans la base de donnée correspondants au poste actuelle
+        $tagsIds = $post->tags()->pluck('id'); //représente les id des tags qui sont déja dans la base de donnée correspondants au poste actuelle
     @endphp
 
 

@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'show post')
+@section('title', $post->title)
 
 
 
@@ -8,6 +8,7 @@
 
     <div style="height: 60px" class="d-flex justify-content-between align-items-center mt-2 p-2 gap-3 pt-3">
         <h4 class="text-dashed">Post details</h4>
+        {{-- affichade d'une alert si une session success est trouvé --}}
         @session('success')
             <div class="alert flex-grow-1 alert-success alert-dismissible fade show pt-3" role="alert" id="myAlert">
                 <strong>Cool !</strong> {{ session('success') }}.
@@ -15,10 +16,8 @@
             </div>
         @endsession
 
-        <a class="btn btn-sm btn-primary" href="{{ route('blog.index') }}">
-            Back</a>
+        <a class="btn btn-sm btn-primary" href="{{ route('blog.index') }}">Back</a>
     </div>
-
 
 
     <div class="row mb-2 mt-5">

@@ -3,7 +3,6 @@
 
 @section('title', 'edit' . $post->title)
 
-
 @section('content')
     <div class=" py-4 d-flex justify-content-between align-items-center">
         <h4 class="text-dashed">Edit post</h4>

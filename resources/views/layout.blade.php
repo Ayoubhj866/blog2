@@ -197,7 +197,7 @@
     {{-- header start --}}
     <main class="bg-dark">
         <div class="container bg-dark">
-            <header class="d-flex justify-content-center py-3">
+            <header class="d-flex justify-content-center py-3 d-flex">
                 <ul class="nav nav-pills">
                     <li class="nav-item"><a href="#"
                             class="nav-link {{ request()->is('welcome') ? 'active' : '' }}"
@@ -208,6 +208,27 @@
                     <li class="nav-item"><a href="{{ route('blog.pivoteTable') }}"
                             class="nav-link {{ request()->is('blog/analyse') ? 'active' : '' }}">Analyse</a></li>
                 </ul>
+
+                <div class="navbar-nav ms-auto mb-2 mb-lg-0 d-flex">
+                    @auth
+                        <div class="d-flex align-items-center gap-2">
+                            <a class="nav-link text-white" href="#">
+                                {{ Auth::user()->name }}
+                            </a>
+
+                            <form action="{{ route('logout') }}" method="post">
+                                @method('delete')
+                                @csrf
+                                <button type="submit" class="nav-link text-white">Logout</button>
+                            </form>
+                        </div>
+
+                    @endauth
+
+                    @guest
+                        <a href="{{ route('loginForm') }}"> Se Connecter</a>
+                    @endguest
+                </div>
             </header>
         </div>
     </main>

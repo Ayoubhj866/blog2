@@ -6,9 +6,11 @@ use App\Http\Requests\StorePostValidation;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request as RequestCl;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
 class PostController extends Controller
@@ -43,8 +45,6 @@ class PostController extends Controller
 
 
 
-
-
     /**
      * Afficher la formulaire d'édition, et la remplire par les donnée du post à éditer
      *
@@ -75,9 +75,9 @@ class PostController extends Controller
     {
 
         $post->update($request->validated());
-        $post->tags()->sync($request->tags); // associer les tags à la post
+        $post->tags()->sync($request->tags); // associer les tags à la post 'syncroniser'
 
-        return \redirect()->route("blog.show", ["slug" => $post->slug, "post" => $post->id])->with("success", "Post updated succesfully");
+        return redirect()->route("blog.show", ["slug" => $post->slug, "post" => $post->id])->with("success", "Post updated succesfully");
     }
 
 

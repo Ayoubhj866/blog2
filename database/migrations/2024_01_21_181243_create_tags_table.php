@@ -19,7 +19,9 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        // Crier une table de relation etre Posts et Tags
+        /**
+         * Crier la rable de l'association etre la table tags et posts
+         */
         Schema::create("post_tag", function (Blueprint $table) {
             $table->foreignIdFor(Post::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Tag::class)->constrained()->cascadeOnDelete();
@@ -32,8 +34,15 @@ return new class extends Migration
      */
     public function down(): void
     {
+        /**
+         * supprimer la table crié avec cette migration en callback
+         */
         Schema::dropIfExists("post_tag");
 
+
+        /**
+         * supprimer la table crié avec cette migration en callback
+         */
         Schema::dropIfExists('tags');
     }
 };

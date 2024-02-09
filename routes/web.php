@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthCOntroller;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,19 @@ Route::get('/', function () {
 
 
 
+/**
+|--------------------------------------------------------------------------
+|  AUthentification routes
+|--------------------------------------------------------------------------
+|
+| Afficher la page login pour s'authentifier
+|
+ */
+
+Route::get("/login", [AuthCOntroller::class, "loginForm"])->name("loginForm");
+Route::post("/login", [AuthCOntroller::class, "connect"])->name("seConnecter");
+Route::delete("/logout", [AuthCOntroller::class, "logout"])->name("logout");
+
 
 /**
  |
@@ -38,13 +52,13 @@ Route::prefix("/blog")->controller(PostController::class)->name("blog.")->group(
     Route::get('/{slug}-{post}', "show")->where(['slug' => '[a-z0-9\-]+', 'post' => '[0-9]+',])->name("show");
 
     // edite post
-    Route::get('/{post}/edit', 'edit')->name("edit");
+    Route::get('/{post}/edit', 'edit')->name("edit")->middleware("auth");
 
     // update post
-    Route::post('/{post}/edit', 'update');
+    Route::post('/{post}/edit', 'update')->middleware("auth");
 
     // create new post (get)
-    Route::get("/new-post", "create")->name("create");
+    Route::get("/new-post", "create")->name("create")->middleware("auth");
 
     // Create new post (post)
     Route::post("/new-post", "store");
